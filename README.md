@@ -1,2 +1,3 @@
-# rust_projects
-My personal projects on Rust
+# Projects on Rust
+My personal projects on Rust.  
+Lessons and examples.
