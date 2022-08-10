@@ -1,3 +1,14 @@
+use std::io;
+
 fn main() {
-    println!("Hello, world!");
+    println!("Загадай число!");                             // вывод
+    println!("Теперь введи его с клавиатуры");              // сообщений
+
+    let mut guess = String::new();                  // инициализация переменной строкового типа
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Ошибка ввода!");
+    
+    println!("Ты загадал: {guess}");                        // вывод на дисплей сообщения и содержимого переменной
 }
