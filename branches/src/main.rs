@@ -112,4 +112,3 @@ fn exmpl_7() {
     }
     println!("LIFTOFF!!!");
 }
-
