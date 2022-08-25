@@ -61,12 +61,17 @@ fn gen_fib (n_fib: &u32) -> Result <u32, String> {
 
     let mut next:u32 = 1;
     let mut prev:u32 = 0;
-    for i in 2..n_fib.to_owned() {
-        println!("{}!", i * next);
+    
+    for i in 0..n_fib.to_owned() {
+        
+        next = prev + next;
+        prev = next;
+
+        // println!("i    = {}", i);
+        // println!("prev = {}", prev);
+        println!("next = {}", next);45 
+            
     }
 
-
-
-    return  Ok(n_fib.to_owned());
-
+    return  Ok(next);
 }
