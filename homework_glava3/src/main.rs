@@ -50,12 +50,22 @@ fn generate_fib() {
         Err(err) => println!("Ошибка: {0}",err),
     }
 }
+
 // функция генерации числа фибоначи в цикле
 fn gen_fib (n_fib: &u32) -> Result <u32, String> {
-    const MAX_N:u32 = 47; // максимальный N для 32 разрядного числа
+    const MAX_N:u32 = 47; // максимальный N для 32 разрядного числа фибоначи
+    
     if n_fib.to_owned() > MAX_N {
         return Err("Сгенерированное значение будет больше возможного".to_owned());        
     };
+
+    let mut next:u32 = 1;
+    let mut prev:u32 = 0;
+    for i in 2..n_fib.to_owned() {
+        println!("{}!", i * next);
+    }
+
+
 
     return  Ok(n_fib.to_owned());
 
