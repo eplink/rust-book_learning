@@ -59,19 +59,24 @@ fn gen_fib (n_fib: &u32) -> Result <u32, String> {
         return Err("Сгенерированное значение будет больше возможного".to_owned());        
     };
 
-    let mut next:u32 = 1;
-    let mut prev:u32 = 0;
+    let mut _x:u32 = 0;
+    let mut x:u32 = 0;
+    let mut fib:u32 = 0;
+    let n = n_fib.to_owned() + 1;
     
-    for i in 0..n_fib.to_owned() {
-        
-        next = prev + next;
-        prev = next;
-
-        // println!("i    = {}", i);
-        // println!("prev = {}", prev);
-        println!("next = {}", next);45 
-            
+    for i in 1..n {
+        if i == 1 {
+            fib = 1;
+            x = fib;
+        } else {
+            fib = _x + x;
+            _x = x;
+            x = fib;     
+        };
     }
-
-    return  Ok(next);
+    
+    return  Ok(fib);
 }
+
+// TODO create a recursive Fibonacci number generation function
+
