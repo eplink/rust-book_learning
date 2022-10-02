@@ -1,33 +1,32 @@
 use std::io;
 
 fn main() {
-    input_and_convert(); 
+    // input_and_convert();
     generate_fib();
 }
 
 // Перевод введенных градусов Фаренгейта в Градусы Цельсия c
 fn input_and_convert() {
     println!("Введите градусы по Фаренгейту");
-    let mut grad_f  = String::new();
-    
+    let mut grad_f = String::new();
+
     io::stdin()
         .read_line(&mut grad_f)
         .expect("Неправильный ввод!");
-    
-    let grad_f:i32 = grad_f.trim()
-                            .parse::<i32>().expect("Ошибка ввода!");
 
-    match convert_to_celsius(&grad_f) {
-        Ok(grad) => println!("в градусах цельсия это: {0}",grad),
-        Err(err) => println!("Ошибка: {0}",err),
+    let grad_f: i32 = grad_f.trim().parse::<i32>().expect("Ошибка ввода!");
+
+    match convert_to_celsius(grad_f) {
+        Ok(grad) => println!("в градусах цельсия это: {0}", grad),
+        Err(err) => println!("Ошибка: {0}", err),
     }
 }
 
 // функция конвертации градусов фаренгейта в градусы цельсия
-fn convert_to_celsius(grad_f: &i32) -> Result <i32, String> {
-    const MIN_FH:i32 = -459; // абсолютный ноль по Фаренгейту
-    if grad_f.to_owned() > MIN_FH {
-        return  Ok((grad_f.to_owned() - 32) * 5 / 9);
+fn convert_to_celsius(grad_f: i32) -> Result<i32, String> {
+    const MIN_FH: i32 = -459; // абсолютный ноль по Фаренгейту
+    if grad_f > MIN_FH {
+        return Ok((grad_f - 32) * 5 / 9);
     } else {
         return Err("Переданное значение меньше абсолютного нуля!".to_owned());
     };
@@ -36,47 +35,60 @@ fn convert_to_celsius(grad_f: &i32) -> Result <i32, String> {
 // Генерирование n-го числа Фибоначчи
 fn generate_fib() {
     println!("Введите номер числа Фибоначчи ");
-    let mut n_fib  = String::new();
-    
+
+    let mut n_fib = String::new();
+
     io::stdin()
         .read_line(&mut n_fib)
         .expect("Неправильный ввод!");
-    
-    let n_fib:u32 = n_fib.trim()
-                            .parse::<u32>().expect("Ошибка ввода!");
 
-    match gen_fib (&n_fib) {
-        Ok(fib) => println!("Число: {0}",fib),
-        Err(err) => println!("Ошибка: {0}",err),
-    }
+    let n_fib: u32 = n_fib.trim().parse::<u32>().expect("Ошибка ввода!");
+
+    println!("Число Фибоначчи: {0}", f_cycle(n_fib))
 }
 
-// функция генерации числа фибоначи в цикле
-fn gen_fib (n_fib: &u32) -> Result <u32, String> {
-    const MAX_N:u32 = 47; // максимальный N для 32 разрядного числа фибоначи
-    
-    if n_fib.to_owned() > MAX_N {
-        return Err("Сгенерированное значение будет больше возможного".to_owned());        
-    };
+// циклическая функция генерации числа фибоначчи
+fn f_cycle(n: u32) -> u32 {
+    //const MAX_X: u32 = 47; // максимальный x для 32 разрядного числа фибоначи
 
-    let mut _x:u32 = 0;
-    let mut x:u32 = 0;
-    let mut fib:u32 = 0;
-    let n = n_fib.to_owned() + 1;
-    
-    for i in 1..n {
+    let mut r: u32 = 0;
+    let mut _r: u32 = 0;
+    let mut x: u32 = 0;
+
+    for i in 1..(n + 1) {
         if i == 1 {
-            fib = 1;
-            x = fib;
+            r = 1;
+            x = r;
         } else {
-            fib = _x + x;
-            _x = x;
-            x = fib;     
+            r = _r + x;
+            _r = x;
+            x = r;
         };
     }
-    
-    return  Ok(fib);
+
+    r
 }
 
-// TODO create a recursive Fibonacci number generation function
+/*
+// рекурсивная функция генерации числа фибоначи
+fn f(x: u32, mut buf ) -> u32 {
+    //const MAX_X: u32 = 47; // максимальный x для 32 разрядного числа фибоначи
+    let mut fib:u32 = 0;
 
+    if buf == 0 {
+
+    }
+
+
+    if x == 1 {
+            fib = 1;
+            fib_ = 0;
+            buf = 0;
+        } else {
+            buf = f(x + 1, buf) + buf;
+        }
+
+    println!("Число: {0}", fib);
+    fib
+}
+*/
